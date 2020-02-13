@@ -25,6 +25,20 @@ function addProjectDetails(e) {
 	var projectID = $(this).closest('.project').attr('id');
 	// get rid of 'project' from the front of the id 'project3'
 	var idNumber = projectID.substr('project'.length);
-
+	var url = "https://lab6-avb.herokuapp.com/project/" + idNumber;
+	$.get(url, callBackFn);
+	console.log(url);
 	console.log("User clicked on project " + idNumber);
+
+	function callBackFn (response) {
+		console.log("hehehehhahahahhaha");
+		console.log("called back");
+		var projectHTML =
+		'<p>' + response['title'] + '</p>' +
+		'<p>' + response['date']  + '</p>' +
+    '<img src="' + response['image'] + '" class="detailsImage">' +
+    '<p>' + response['summary'] + '</p>';
+
+		$("#project" + idNumber + " .details").html(projectHTML);
+	}
 }
